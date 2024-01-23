@@ -94,7 +94,7 @@ export const CourseSchema = z.object({
   id: IdSchema,
   institution_id: IdSchema,
   options: z.any(),
-  path: z.string().nullable(),
+  path: z.string(),
   repository: z.string().nullable(),
   sharing_name: z.string().nullable(),
   sharing_token: z.string(),
@@ -537,7 +537,6 @@ export const InstanceQuestionSchema = z.object({
   id: IdSchema,
   incremental_submission_points_array: z.array(z.number().nullable()).nullable(),
   incremental_submission_score_array: z.array(z.number().nullable()).nullable(),
-  instructor_question_number: z.string().nullable(),
   last_grader: IdSchema.nullable(),
   last_submission_score: z.number().nullable(),
   manual_points: z.number().nullable(),
@@ -585,7 +584,6 @@ export const SubmissionSchema = z.object({
   params: z.record(z.string(), z.any()).nullable(),
   partial_scores: z.record(z.string(), z.any()).nullable(),
   raw_submitted_answer: z.record(z.string(), z.any()).nullable(),
-  regradable: z.boolean().nullable(),
   score: z.number().nullable(),
   submitted_answer: z.record(z.string(), z.any()).nullable(),
   true_answer: z.record(z.string(), z.any()).nullable(),
@@ -787,7 +785,7 @@ export const GroupSchema = z.object({
   course_instance_id: IdSchema,
   date: DateFromISOString.nullable(),
   deleted_at: DateFromISOString.nullable(),
-  group_config_id: IdSchema.nullable(),
+  group_config_id: IdSchema,
   id: IdSchema,
   join_code: z.string(),
   name: z.string(),
@@ -795,6 +793,7 @@ export const GroupSchema = z.object({
 export type Group = z.infer<typeof GroupSchema>;
 
 export const GroupUserSchema = z.object({
+  group_config_id: IdSchema,
   group_id: IdSchema,
   user_id: IdSchema,
 });
